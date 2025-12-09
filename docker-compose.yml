@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: coopcredit-postgres
+    environment:
+      POSTGRES_DB: coopcredit
+      POSTGRES_USER: coopcredit
+      POSTGRES_PASSWORD: coopcredit
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U coopcredit" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  credit-application-service:
+    build:
+      context: ./credit-application-service
+      dockerfile: Dockerfile
+    container_name: credit-application-service
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/coopcredit
+      SPRING_DATASOURCE_USERNAME: coopcredit
+      SPRING_DATASOURCE_PASSWORD: coopcredit
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - coopcredit-network
+
+  risk-central-mock-service:
+    build:
+      context: ./risk-central-mock-service
+      dockerfile: Dockerfile
+    container_name: risk-central-mock-service
+    ports:
+      - "8081:8081"
+    networks:
+      - coopcredit-network
+
+volumes:
+  postgres-data:
+
+networks:
+  coopcredit-network:
+    driver: bridge

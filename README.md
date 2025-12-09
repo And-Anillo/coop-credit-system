@@ -632,15 +632,9 @@ docker-compose logs postgres
 
 ---
 
-## 📄 License
-
-[Add your license here]
-
----
-
 ## 👥 Authors
 
-- **Your Name** - Architecture & Implementation
+- *Andersson Moises Vargas Anillo - Architecture & Implementation
 
 ---
 

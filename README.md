@@ -571,18 +571,3 @@ docker-compose logs postgres
 ## 👥 Authors
 
 - *Andersson Moises Vargas Anillo - Architecture & Implementation
-
----
-
-## 🔄 Version History
-
-- **v0.0.1** (Jan 2025) - Initial hexagonal architecture setup
-  - Domain layer with Affiliate entity
-  - Ports and adapters pattern
-  - Foundation for application layer
-
----
-
-**Last Updated:** January 9, 2025
-
-For detailed information, see the documentation files in the project root.

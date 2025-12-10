@@ -447,55 +447,8 @@ risk-central.url=http://localhost:8081
 1. **Pure Domain** - No Spring in `domain/` package
 2. **Ports & Adapters** - Interfaces define contracts
 3. **Dependency Injection** - Outer layers inject into inner layers
-4. **Language Rules** - Code in English, user messages in Spanish
-5. **Error Handling** - RFC 7807 ProblemDetail format
+4. **Error Handling** - RFC 7807 ProblemDetail format
 
-### Adding New Features
-
-1. **Create Domain Entity** (e.g., `domain/entity/Loan.java`)
-
-   - Pure Java, no annotations
-   - Factory methods, validation
-   - Business operations
-
-2. **Create Ports** (e.g., `domain/port/input/CreateLoanUseCase.java`)
-
-   - Input ports (use cases)
-   - Output ports (repositories)
-
-3. **Create Service** (e.g., `application/service/CreateLoanService.java`)
-
-   - Implements input port
-   - Injects output ports
-   - Orchestrates domain logic
-
-4. **Create DTO** (e.g., `application/dto/CreateLoanRequest.java`)
-
-   - Validation annotations
-   - Maps to/from domain
-
-5. **Create Controller** (e.g., `infrastructure/adapter/rest/LoanController.java`)
-
-   - Injects use cases
-   - Maps DTOs to domain
-   - Returns responses
-
-6. **Create Repository Adapter** (e.g., `infrastructure/adapter/persistence/LoanRepositoryAdapter.java`)
-
-   - Implements output port
-   - Converts domain ↔ JPA
-
-7. **Create JPA Entity** (e.g., `infrastructure/persistence/entity/LoanEntity.java`)
-
-   - @Entity annotations
-   - Database mappings
-
-8. **Create Tests**
-   - Domain tests (pure Java)
-   - Service tests (with mocks)
-   - Controller tests (integration)
-
----
 
 ## 📚 Documentation
 
@@ -556,23 +509,6 @@ The `risk-central-mock-service` provides a deterministic risk evaluation:
   - BAJO (Low): score >= 700
   - MEDIO (Medium): 500 <= score < 700
   - ALTO (High): score < 500
-
----
-
-## 📝 Language Constraints
-
-### English (Code)
-
-- Class names: `AffiliateService`, `CreditApplication`
-- Method names: `createAffiliate()`, `evaluateRisk()`
-- Variables: `affiliateName`, `creditAmount`
-- Comments: "Calculate affiliate eligibility"
-
-### Spanish (User-Facing)
-
-- Error messages: "El afiliado no fue encontrado"
-- API responses: `"detail": "El salario debe ser mayor a cero"`
-- Status labels: "Activo", "Inactivo", "Pendiente"
 
 ---
 
